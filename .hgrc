@@ -1,0 +1,34 @@
+# in the local hgrc, include this line:
+# %include settings/.hgrc
+
+[alias]
+# list the given commits and the files they touched
+list = log --stat --rev
+vlist = log --verbose --stat --rev
+# like git show
+show = log --patch --rev
+vshow = log --verbose --patch --rev
+
+d = diff
+diffbase = diff --rev 'ancestor($1, .)'
+db = diffbase $1
+
+rb = rebase
+
+mylog = log --graph --user $USER --all -l
+log-added = log -r 'ancestor($1, $2)::$2-ancestor($1, $2)'
+
+[extensions]
+histedit =
+rebase =
+graphlog =
+color =
+purge =
+mq =
+
+[pager]
+pager = LESS='FRX' less
+attend = sl, diff, d, db, diffbase, status, help, log, blame, show, list, annotate
+
+[ui]
+merge = internal:merge

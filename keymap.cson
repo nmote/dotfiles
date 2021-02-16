@@ -1,0 +1,2 @@
+'atom-text-editor.vim-mode:not(.command-mode)':
+  'shift-tab': 'vim-mode:activate-command-mode'

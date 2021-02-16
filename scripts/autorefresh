@@ -1,0 +1,51 @@
+#!/usr/bin/ruby
+
+trap "INT" do
+  exit 0
+end
+
+if ARGV.empty?
+  puts "Usage: autorefresh command"
+  puts "Put the command in quotes to ensure that the shell passes it as a " +
+       "single argument"
+  exit 1
+end
+
+head = true
+if ARGV.delete '-nohead'
+  head = false
+end
+
+command, canary = ARGV
+
+lines = ''
+numlines = 0
+
+canary_result = nil
+loop do
+  newnumlines = `tput lines`.to_i
+  cols = `tput cols`.to_i
+
+  if canary
+    new_canary_result = `#{canary}` + newnumlines.to_s + '.' + cols.to_s
+    if canary_result == new_canary_result
+      sleep 1
+      next
+    end
+    canary_result = new_canary_result
+  end
+
+  if head
+    newlines = `#{command} | fold -w #{cols} | head -n #{newnumlines - 1}`
+  else
+    newlines = `#{command}`
+  end
+
+  if lines != newlines || numlines != newnumlines
+    system 'clear'
+    puts newlines
+    lines = newlines
+    numlines = newnumlines
+  end
+  sleep 1
+end

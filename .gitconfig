@@ -1,0 +1,23 @@
+# in the local gitconfig, include these lines:
+# [include]
+#   path = ~/settings/.gitconfig
+
+[alias]
+  st = status
+  ci = commit
+  d  = diff
+  dc = diff --cached
+  co = checkout
+  graph = log --graph --all --decorate
+  g = log --graph --all --decorate
+  go = log --graph --all --decorate --oneline
+  list = show --name-only
+  cp = cherry-pick
+  rb = rebase
+  b = branch
+
+[color]
+  ui = true
+
+[push]
+	default = simple
