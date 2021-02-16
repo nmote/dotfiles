@@ -1,6 +1,6 @@
 # in the local gitconfig, include these lines:
 # [include]
-#   path = ~/settings/.gitconfig
+#   path = ~/dotfiles/.gitconfig
 
 [alias]
   st = status
