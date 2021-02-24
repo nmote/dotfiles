@@ -43,7 +43,7 @@ export EDITOR=vim
 # weird things happen with tput if we're not in a normal terminal
 tty -s && export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\u@\h \D{%H:%M:%S} \W]$ \[$(tput sgr0)\]"
 
-export PATH=$PATH:~/settings/scripts
+export PATH=$PATH:~/dotfiles/scripts
 export PATH=~/bin:$PATH
 
 umask 027
