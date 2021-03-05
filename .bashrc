@@ -38,6 +38,16 @@ function findgrep
   find . -type f -name "$1" -exec grep -H "$2" {} \;
 }
 
+function forward-port() {
+  if [[ -z "$1" || -z "$2" ]] ; then
+    echo "Usage:"
+    echo "  forward-port remote-user-and-address port"
+    return 1
+  fi
+  # Will use the same port number for the remote and local port
+  ssh -N -L "$2:localhost:$2" "$1"
+}
+
 export EDITOR=vim
 
 # weird things happen with tput if we're not in a normal terminal
