@@ -24,6 +24,8 @@ alias cdp="cd -P"
 
 alias ci="echo 'did you mean vi?'"
 
+alias yrf="yarn run flow"
+
 alias hgslautorefresh="autorefresh 'hg sl --color always --all 2>&1' 'shasum .hg/dirstate .hg/bookmarks .hg/bookmarks.current .hg/remotenames 2>&1'"
 
 if [ $platform == 'Linux' ]; then
