@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Takes an igc file and replaces the pressure altitude with gps altitude.
+#
+# Ayvri uses pressure altitude, but unless the altimeter setting is updated in
+# flight it can drift, leading to inaccurate results. GPS is more reliable, at
+# least on my Flymaster.
+
+sed -i -e 's/A[0-9]\{5\}\([0-9]\{5\}\)/A\1\1/' $1
