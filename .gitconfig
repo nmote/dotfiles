@@ -9,8 +9,8 @@
   dc = diff --cached
   co = checkout
   graph = log --graph --all --decorate
-  g = log --graph --all --decorate
-  go = log --graph --all --decorate --oneline
+  g = log --graph --decorate --branches
+  go = log --graph --decorate --oneline --branches
   list = show --name-only
   cp = cherry-pick
   rb = rebase
