@@ -1,0 +1,30 @@
+#!/bin/bash
+
+INPUT=$1
+
+QUALITY=$2
+
+function usage() {
+  echo "Usage:"
+  echo "$(basename $0) input.heif [quality]"
+  echo "Quality: 0-100"
+  exit 1
+}
+
+if [ -z "$INPUT" ] ; then
+  usage
+fi
+
+BASE="${INPUT%.*}"
+
+OUTPUT="$BASE.jpg"
+
+QUALITY_FLAG=""
+
+if [ -n "$QUALITY" ] ; then
+  QUALITY_FLAG="-q $QUALITY"
+fi
+
+# deliberately don't quote $QUALITY_FLAG so it's split into two arguments.
+# nobody should be passing a quality with spaces in it anyway
+heif-convert $QUALITY_FLAG "$INPUT" "$OUTPUT"
