@@ -15,6 +15,7 @@
   cp = cherry-pick
   rb = rebase
   b = branch
+  su = submodule update --init --recursive
 
 [color]
   ui = true
