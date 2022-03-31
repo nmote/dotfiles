@@ -3,6 +3,7 @@
 require('date')
 
 total = 0.0
+actual_total = 0.0
 
 err = false
 
@@ -25,6 +26,7 @@ STDIN.each_line do |line|
       err = true
     end
     total += sum
+    actual_total += sum
   end
   if totalregex.match? line then
     found_total = line.split[1].to_f
@@ -46,4 +48,5 @@ if err then
   exit 1
 else
   puts "No issues found"
+  puts "Total hours on timesheet: #{actual_total}"
 end
