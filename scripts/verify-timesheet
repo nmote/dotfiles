@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+require('date')
+
+total = 0.0
+
+err = false
+
+entryregex = /^\d\d:\d\d - \d\d:\d\d -> \d+\.\d$/
+totalregex = /^Total: \d+\.\d$/
+
+STDIN.each_line do |line|
+  line = line.strip
+  if entryregex.match? line then
+    parts = line.split
+
+    start = DateTime.parse(parts[0])
+    end_ = DateTime.parse(parts[2])
+    sum = parts[4].to_f
+
+    calculated_sum = ((end_ - start)*24).to_f.round(1)
+
+    if calculated_sum != sum then
+      STDERR.puts "Mismatch: #{line} (calculated #{calculated_sum})"
+      err = true
+    end
+    total += sum
+  end
+  if totalregex.match? line then
+    found_total = line.split[1].to_f
+    if found_total != total then
+      STDERR.puts "Total mismatch: Found: #{found_total} Calculated: #{total}"
+      err = true
+    end
+
+    total = 0.0
+  end
+end
+
+if total != 0.0 then
+  STDERR.puts "Remaining total: #{total}"
+  err = true
+end
+
+if err then
+  exit 1
+else
+  puts "No issues found"
+end
