@@ -146,3 +146,4 @@ set nojoinspaces
 
 inoremap <C-h> <C-n>
 inoremap <S-Tab> <Esc>
+vnoremap <S-Tab> <Esc>
