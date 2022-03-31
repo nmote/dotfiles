@@ -16,6 +16,8 @@
   rb = rebase
   b = branch
   su = submodule update --init --recursive
+  amend = commit --amend --no-edit
+  reword = commit --amend --only
 
 [color]
   ui = true
