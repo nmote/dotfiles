@@ -37,6 +37,8 @@ alias psgrep='ps -ef | grep'
 
 alias autorefresh-git="autorefresh 'git go --color=always'"
 
+alias copy="xsel -ib"
+
 function findgrep
 {
   find . -type f -name "$1" -exec grep -H "$2" {} \;
