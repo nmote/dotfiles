@@ -39,6 +39,8 @@ alias autorefresh-git="autorefresh 'git go --color=always'"
 
 alias copy="xsel -ib"
 
+alias git-mega-clean='git clean -xfd; git submodule foreach --recursive git clean -xfd'
+
 function findgrep
 {
   find . -type f -name "$1" -exec grep -H "$2" {} \;
