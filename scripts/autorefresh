@@ -11,6 +11,45 @@ if ARGV.empty?
   exit 1
 end
 
+def wrap_and_truncate(text, cols, lines)
+  current_cols = 0
+  current_lines = 0
+  result = ''
+  i = 0
+  while (i < text.length && current_lines < lines) do
+    if current_cols == cols && text[i] != "\n" then
+      result << "\n"
+      current_lines += 1
+      current_cols = 0
+    end
+
+    if text[i..i+1] == "\u001b[" then
+      # Consume the whole control sequence without incrementing current_cols
+      j = i + 2
+      while (j < text.length && (text[j] < 0x40.chr || text[j] > 0x7E.chr)) do
+        j += 1
+      end
+      j += 1
+      result << text[i...j]
+      i = j
+      next
+    end
+
+    result << text[i]
+
+    if text[i] == "\n" then
+      current_lines += 1
+      current_cols = 0
+      i += 1
+      next
+    end
+
+    i += 1
+    current_cols += 1
+  end
+  return result
+end
+
 head = true
 if ARGV.delete '-nohead'
   head = false
@@ -36,7 +75,7 @@ loop do
   end
 
   if head
-    newlines = `#{command} | fold -w #{cols} | head -n #{newnumlines - 1}`
+    newlines = wrap_and_truncate(`#{command}`, cols, newnumlines - 1)
   else
     newlines = `#{command}`
   end
