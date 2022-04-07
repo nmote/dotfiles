@@ -1,5 +1,5 @@
 #!/bin/bash
-ln -siT $HOME/dotfiles/.vim $HOME/.vim
+ln -siT $HOME/dotfiles/vim/ $HOME/.vim/nmote
 ln -si $HOME/dotfiles/.vimrc $HOME/.vimrc
 ln -si $HOME/dotfiles/.bashrc $HOME/.bashrc
 ln -si $HOME/dotfiles/.bash_profile $HOME/.bash_profile
