@@ -25,7 +25,7 @@ STDIN.each_line do |line|
       STDERR.puts "Mismatch: #{line} (calculated #{calculated_sum})"
       err = true
     end
-    total += sum
+    total = (total + sum).round(1)
     actual_total += sum
   end
   if totalregex.match? line then
@@ -44,9 +44,10 @@ if total != 0.0 then
   err = true
 end
 
+puts "Total hours on timesheet: #{actual_total.round(1)}"
+
 if err then
   exit 1
 else
   puts "No issues found"
-  puts "Total hours on timesheet: #{actual_total}"
 end
