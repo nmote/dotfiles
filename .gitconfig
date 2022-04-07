@@ -23,7 +23,7 @@
   ui = true
 
 [push]
-  default = simple
+  default = upstream
 
 [advice]
 	skippedCherryPicks = false
