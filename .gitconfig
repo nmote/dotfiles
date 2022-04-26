@@ -27,3 +27,6 @@
 
 [advice]
 	skippedCherryPicks = false
+
+[commit]
+  gpgsign = true
