@@ -10,7 +10,7 @@
   co = checkout
   graph = log --graph --all --decorate
   g = log --graph --decorate --branches
-  go = log --graph --decorate --oneline --branches
+  go = -c log.showSignature=false log --graph --decorate --oneline --branches
   list = show --name-only
   cp = cherry-pick
   rb = rebase
@@ -33,3 +33,6 @@
 
 [commit]
   gpgsign = true
+
+[log]
+  showSignature = true
