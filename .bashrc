@@ -83,6 +83,23 @@ function unmount-luks() {
   sudo cryptsetup luksClose "/dev/mapper/$1" || return 1
 }
 
+function git-rb-stack() {
+  if [[ -z "$1" || -z "$2" ]] ; then
+    echo "Usage:"
+    echo "  git-rb-stack dest source [source2] [source3] ..."
+    return 1
+  fi
+  DEST=$1
+  shift 1
+
+  PREV_SRC=$DEST
+  for SRC in "$@" ; do
+    git checkout "$SRC"
+    git rebase "$PREV_SRC"
+    PREV_SRC=$SRC
+  done
+}
+
 export EDITOR=vim
 
 # weird things happen with tput if we're not in a normal terminal
