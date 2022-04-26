@@ -28,5 +28,8 @@
 [advice]
 	skippedCherryPicks = false
 
+[core]
+  commentChar = ";"
+
 [commit]
   gpgsign = true
