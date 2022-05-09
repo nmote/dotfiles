@@ -36,3 +36,7 @@
 
 [log]
   showSignature = true
+
+[submodule]
+  recurse = true
+  fetchJobs = 20
