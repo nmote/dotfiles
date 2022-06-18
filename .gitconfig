@@ -20,6 +20,7 @@
   amend = commit --amend --no-edit
   reword = commit --amend --only
   loghashes = -c log.showSignature=false log --format='%H'
+  f = fetch -p
 
 [color]
   ui = true
