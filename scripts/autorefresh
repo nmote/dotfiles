@@ -1,6 +1,8 @@
 #!/usr/bin/ruby
 
 trap "INT" do
+  puts
+  system 'tput cnorm'
   exit 0
 end
 
@@ -56,6 +58,8 @@ if ARGV.delete '-nohead'
 end
 
 command, canary = ARGV
+
+system 'tput civis'
 
 lines = ''
 numlines = 0
