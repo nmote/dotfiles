@@ -10,7 +10,7 @@
   co = checkout
   graph = log --graph --all --decorate
   g = log --graph --decorate --branches
-  go = -c log.showSignature=false log --graph --decorate --oneline --branches
+  go = -c log.showSignature=false log --graph --decorate --oneline --branches HEAD
   list = show --name-only
   cp = cherry-pick
   rb = rebase
