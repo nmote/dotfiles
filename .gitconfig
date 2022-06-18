@@ -19,6 +19,7 @@
   su = submodule update --init --recursive
   amend = commit --amend --no-edit
   reword = commit --amend --only
+  loghashes = -c log.showSignature=false log --format='%H'
 
 [color]
   ui = true
