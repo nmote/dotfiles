@@ -82,7 +82,8 @@ loop do
 
   if lines != newlines || numlines != newnumlines
     system 'clear'
-    puts newlines
+    print (newlines.strip)
+    STDOUT.flush
     lines = newlines
     numlines = newnumlines
   end
