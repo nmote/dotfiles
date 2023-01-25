@@ -43,7 +43,7 @@ alias git-mega-clean='git clean -xfd; git submodule foreach --recursive git clea
 
 function findgrep
 {
-  find . -type f -name "$1" -exec grep -H "$2" {} \;
+  find . -type f -name "$1" -exec grep -H -- "$2" {} \;
 }
 
 function forward-port() {
