@@ -17,10 +17,11 @@
   rb = rebase
   b = branch
   su = submodule update --init --recursive
-  amend = commit --amend --no-edit
-  reword = commit --amend --only
+  amend = commit --amend --no-edit --date=now
+  reword = commit --amend --only --date=now
   loghashes = -c log.showSignature=false log --format='%H'
   f = fetch -p
+  id = "! git -c log.showSignature=false log --format='%H' \"$1^\"..\"$1\""
 
 [color]
   ui = true
