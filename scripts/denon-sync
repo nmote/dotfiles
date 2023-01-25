@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+if [[ ! -d "$DENON_DRIVE" ]]; then
+  echo 'Set $DENON_DRIVE to the path to the drive used in the Denon Prime product, and ensure that it is inserted'
+  exit 1
+fi
+
+if [[ ! -d "$DENON_MUSIC_DIR" ]]; then
+  echo 'Set $DENON_MUSIC_DIR to the local directory containing your music'
+  exit 1
+fi
+
+if [[ ! -d "$DENON_DB_BACKUP" ]]; then
+  echo 'Set $DENON_DB_BACKUP to the local directory your backup Denon database'
+  exit 1
+fi
+
+echo "Syncing music"
+rsync -av "$DENON_MUSIC_DIR/" "$DENON_DRIVE/Music/"
+echo "Syncing database"
+rsync -av "$DENON_DRIVE/Engine Library/" "$DENON_DB_BACKUP/"
+
