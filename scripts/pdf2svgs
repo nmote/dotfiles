@@ -1,0 +1,12 @@
+#!/bin/bash
+
+pdf=$1
+
+if [[ ! -f $pdf ]]; then
+  echo "Usage: $0 pdf-input"
+  exit 1
+fi
+
+withoutExt=${pdf%.*}
+
+pdf2svg "$pdf" "$withoutExt-%04d.svg" all
