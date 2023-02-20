@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function usage() {
+  echo "Usage: $0 svg-input png-output"
+  exit 1
+}
+
+svg=$1
+png=$2
+
+if [[ ! -f $svg ]]; then
+  echo "Missing svg input argument"
+  usage
+fi
+
+if [[ -z $png ]]; then
+  echo "Missing png output argument"
+  usage
+fi
+
+inkscape "$svg" -o "$png"
