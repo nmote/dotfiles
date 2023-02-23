@@ -17,8 +17,18 @@ if [[ ! -d "$DENON_DB_BACKUP" ]]; then
   exit 1
 fi
 
+EXTRA_ARGS=""
+
+while test $# -gt 0 ; do
+  case "$1" in
+    --delete) EXTRA_ARGS="$EXTRA_ARGS --delete"
+      ;;
+  esac
+  shift
+done
+
 echo "Syncing music"
-rsync -av "$DENON_MUSIC_DIR/" "$DENON_DRIVE/Music/" --delete
+rsync -av "$DENON_MUSIC_DIR/" "$DENON_DRIVE/Music/" $EXTRA_ARGS
 echo "Syncing database"
 rsync -av "$DENON_DRIVE/Engine Library/" "$DENON_DB_BACKUP/"
 
