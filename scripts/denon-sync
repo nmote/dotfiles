@@ -18,7 +18,7 @@ if [[ ! -d "$DENON_DB_BACKUP" ]]; then
 fi
 
 echo "Syncing music"
-rsync -av "$DENON_MUSIC_DIR/" "$DENON_DRIVE/Music/"
+rsync -av "$DENON_MUSIC_DIR/" "$DENON_DRIVE/Music/" --delete
 echo "Syncing database"
 rsync -av "$DENON_DRIVE/Engine Library/" "$DENON_DB_BACKUP/"
 
