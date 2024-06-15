@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Get the source identifier. This is how the M-Audio M-Track Solo input appears
+# on my machine.
+source=$(pamixer --list-sources | grep input.usb-BurrBrown_from_Texas_Instruments_USB_AUDIO_CODEC-00.iec958-stereo | cut -d' ' -f 1)
+
+if [[ -z "$source" ]] ; then
+  echo "Unable to find the audio source"
+  exit 1
+fi
+
+target_volume=$1
+
+if [[ -z "$target_volume" ]] ; then
+  echo "Current volume:"
+  pamixer --source "$source" --get-volume
+
+  echo
+  echo "Suggested values:"
+  echo "Mic input for Shure SM58: 200, with input volume knob a bit above 9"
+  echo "Line input for Denon Prime Go: 160, with input volume knob at 3 and booth out on Prime Go at 0 gain"
+else
+  pamixer --source "$source" --allow-boost --set-volume "$target_volume"
+fi
