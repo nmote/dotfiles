@@ -151,3 +151,6 @@ vnoremap <S-Tab> <Esc>
 :runtime nmote/related.vim
 
 nnoremap <C-H> :OpenRelatedFile<CR>
+
+" Disable rustfmt broken autoformat-on-save
+autocmd BufEnter *.rs autocmd! rust.vim.PreWrite

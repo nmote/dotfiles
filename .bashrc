@@ -83,6 +83,16 @@ function unmount-luks() {
   sudo cryptsetup luksClose "/dev/mapper/$1" || return 1
 }
 
+function wav-to-mp3() {
+  if [[ -z "$1" || -z "$2" ]] ; then
+    echo "Usage:"
+    echo "  wav-to-mp3 input.wav output.mp3"
+    return 1
+  fi
+
+  ffmpeg -i "$1" -vn -ac 2 -b:a 320k "$2"
+}
+
 function git-rb-stack() {
   if [[ -z "$1" || -z "$2" ]] ; then
     echo "Usage:"
@@ -99,6 +109,8 @@ function git-rb-stack() {
     PREV_SRC=$SRC
   done
 }
+
+alias mtime="$(which time) -f 'real: %e s\nMax RSS (Kb): %M Kb'"
 
 export EDITOR=vim
 
