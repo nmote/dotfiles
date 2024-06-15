@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'set'
+
+def canonicalize(str)
+  str.strip.upcase.gsub(/ +/, ' ')
+end
+
+members_str = File.read('members.txt')
+pilots_str = File.read('pilots.txt')
+
+members = Set.new
+
+members_str.split("\n").each { |member| members.add(canonicalize(member)) }
+
+pilots_str.split("\n").each do |pilot|
+  pilot = canonicalize(pilot)
+  unless members.include? pilot.strip.upcase
+    puts pilot
+  end
+end
