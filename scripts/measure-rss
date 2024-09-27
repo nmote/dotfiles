@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+require 'csv'
+
+def usage()
+  puts "Usage:"
+  puts "  #{$0} command output.csv"
+  exit(1)
+end
+
+def get_rss(pid)
+  _label, amount, unit = `cat /proc/#{pid}/smaps_rollup 2> /dev/null | grep '^Rss:'`.split
+  # Happens if the child process has already finished
+  return nil if amount.nil?
+  raise "Wrong unit #{unit.inspect}" unless unit == 'kB'
+  amount.to_i
+end
+
+cmd, output = ARGV
+
+usage() if output.nil?
+
+START_TIME = Time.now.to_f
+
+def time_since_start()
+  Time.now.to_f - START_TIME
+end
+
+def time_to_next_second()
+  since_start = time_since_start()
+  since_start.ceil - since_start
+end
+
+pid = spawn(cmd)
+thread = Process.detach(pid)
+
+rss_by_second = []
+
+while thread.alive? do
+  current_second = time_since_start()
+  rss = get_rss(pid)
+  break if rss.nil?
+  rss_by_second[current_second] = rss
+  sleep time_to_next_second()
+end
+
+CSV.open(output, "wb") do |csv|
+  csv << ["time (s)", "RSS (kB)"]
+  rss_by_second.each_with_index do |rss, time|
+    csv << [time, rss]
+  end
+end
