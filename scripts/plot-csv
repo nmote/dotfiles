@@ -1,0 +1,34 @@
+#!/usr/bin/env Rscript
+
+args = commandArgs(trailingOnly=TRUE)
+if (length(args) < 2) {
+  stop("Usage: plot-csv input.csv output.png [title] [ymax]")
+}
+input = args[1]
+output = args[2]
+title = args[3]
+ymax = args[4]
+
+# TODO take parameter for filename
+data = read.csv(input, header=FALSE)
+
+xlabel=data[1, 1]
+ylabel=data[1, 2]
+
+data = data[-1,]
+
+if (is.na(title)) {
+  title = paste(ylabel, "vs", xlabel)
+}
+
+if (is.na(ymax)) {
+  ymax = max(as.numeric(data$V2))
+} else {
+  ymax = as.numeric(ymax)
+}
+
+ymax
+
+png(output, width=720, height=720)
+plot(x=data$V1, y=data$V2, xlab=xlabel, ylab=ylabel, type="l", main=title, ylim=c(0, ymax))
+dev.off()
