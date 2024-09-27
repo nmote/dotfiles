@@ -3,7 +3,7 @@
 require 'set'
 
 def canonicalize(str)
-  str.strip.upcase.gsub(/ +/, ' ')
+  str.strip.upcase.gsub(/\s+/, ' ')
 end
 
 members_str = File.read('members.txt')
@@ -15,7 +15,7 @@ members_str.split("\n").each { |member| members.add(canonicalize(member)) }
 
 pilots_str.split("\n").each do |pilot|
   pilot = canonicalize(pilot)
-  unless members.include? pilot.strip.upcase
+  unless members.include? pilot
     puts pilot
   end
 end
