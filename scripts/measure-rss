@@ -40,12 +40,13 @@ while thread.alive? do
   current_second = time_since_start()
   rss = get_rss(pid)
   break if rss.nil?
-  rss_by_second[current_second] = rss
+  rss_mb = rss / 1024.0
+  rss_by_second[current_second] = rss_mb
   sleep time_to_next_second()
 end
 
 CSV.open(output, "wb") do |csv|
-  csv << ["time (s)", "RSS (kB)"]
+  csv << ["time (s)", "RSS (MB)"]
   rss_by_second.each_with_index do |rss, time|
     csv << [time, rss]
   end
