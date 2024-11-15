@@ -154,3 +154,5 @@ nnoremap <C-H> :OpenRelatedFile<CR>
 
 " Disable rustfmt broken autoformat-on-save
 autocmd BufEnter *.rs autocmd! rust.vim.PreWrite
+
+packadd! matchit
